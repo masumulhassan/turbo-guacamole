@@ -15,15 +15,15 @@ find_partner_share_and_move() {
   echo "Original Metadata file: $1";
   if grep -q fromPartnerSharing "$1"; then
       current_file=$(jq '.title' "$1" | sed -r 's/^"|"$//g';);
+      DIR="$(dirname "${1}")";
+      
       echo "Moving -> $current_file";
-	  DIR="$(dirname "${1}")";
-	  
-	  echo "Destination: ${outputpath}/${DIR}";
-	  echo "JSON File: ${1}";
-	  echo "Media File: ${DIR}/${current_file}";
+      echo "Destination: ${outputpath}/${DIR}";
+      echo "JSON File: ${1}";
+      echo "Media File: ${DIR}/${current_file}";
 	  
       mkdir -p "${outputpath}/${DIR}";
-	  mv "${1}" "${outputpath}/${DIR}/.";
+      mv "${1}" "${outputpath}/${DIR}/.";
       mv "${DIR}/${current_file}" "${outputpath}/${DIR}/.";
   fi
 }
