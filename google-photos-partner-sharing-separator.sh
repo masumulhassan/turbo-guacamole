@@ -18,6 +18,10 @@ find_partner_share_and_move() {
       echo "Moving -> $current_file";
 	  DIR="$(dirname "${1}")";
 	  
+	  echo "Destination: ${outputpath}/${DIR}";
+	  echo "JSON File: ${1}";
+	  echo "Media File: ${DIR}/${current_file}";
+	  
       mkdir -p "${outputpath}/${DIR}";
 	  mv "${1}" "${outputpath}/${DIR}/.";
       mv "${DIR}/${current_file}" "${outputpath}/${DIR}/.";
@@ -27,3 +31,4 @@ find_partner_share_and_move() {
 find "$inputpath" -type f -name "*.json" -print0 | while read -d $'\0' file; do
     find_partner_share_and_move "$file"
 done
+
